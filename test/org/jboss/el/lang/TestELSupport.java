@@ -106,4 +106,25 @@ public class TestELSupport {
     public void coerceToTypeSuperTypeMyBigDecimalToBigDecimal(){
         assertCoerceToSuperType(new MyBigDecimal("34.223"), BigDecimal.class);
     }
+
+    @Test
+    public void coerceToTypeNullLong(){
+        assertEquals(0l, ((Long)ELSupport.coerceToType(null, Long.class)).longValue());
+    }
+    @Test
+    public void coerceToTypeNullInteger(){
+        assertEquals(0, ((Integer)ELSupport.coerceToType(null, Integer.class)).intValue());
+    }
+    @Test
+    public void coerceToTypeNullBigDecimal(){
+        assertEquals(new BigDecimal(0), ((BigDecimal)ELSupport.coerceToType(null, BigDecimal.class)).intValue());
+    }
+    @Test
+    public void coerceToTypeNullString(){
+        assertEquals("", ELSupport.coerceToType(null, String.class));
+    }
+    @Test
+    public void coerceToTypeNullNumber(){
+        assertEquals(0l, ((Number) ELSupport.coerceToType(null, Number.class)).longValue());
+    }
 }
