@@ -1,9 +1,11 @@
 package org.jboss.el.lang;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertSame;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
 
 import org.junit.Test;
 
@@ -34,5 +36,26 @@ public class TestELArithmetic {
     @Test
     public void testCoerceNumberMyBigDecimal(){
         assertCoerceToBigDecimalSameNumber(new MyBigDecimal("3434"));
+    }
+
+    private void assertNumberType(Class<?> type){
+        if (!ELArithmetic.isNumberType(type))
+            throw new AssertionError(type.getName()+" is number type but ELArithmetic missed it.");
+    }
+    // Tests for ELSupport.isNumberType
+    @Test
+    public void testIsNumberType(){
+        assertFalse(ELArithmetic.isNumberType(Object.class));
+        assertFalse(ELArithmetic.isNumberType(String.class));
+
+        assertNumberType(Long.class);
+        assertNumberType(Long.TYPE);
+
+        assertNumberType(BigDecimal.class);
+        assertNumberType(BigInteger.class);
+        assertNumberType(Number.class);
+
+        assertNumberType(MyBigDecimal.class);
+        assertNumberType(MyNumber.class);
     }
 }
