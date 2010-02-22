@@ -215,6 +215,9 @@ public class ELSupport {
 
     protected final static Number coerceToNumber(final Number number,
             final Class type) throws IllegalArgumentException {
+        if (type.isInstance(number))
+            return number;
+
         if (Long.TYPE == type || Long.class.equals(type)) {
             return new Long(number.longValue());
         }
