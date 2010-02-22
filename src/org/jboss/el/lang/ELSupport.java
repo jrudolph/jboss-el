@@ -324,6 +324,9 @@ public class ELSupport {
         if (type == null || Object.class.equals(type)) {
             return obj;
         }
+        else if (obj != null && type.isInstance(obj)) {
+            return obj;
+        }
         if (String.class.equals(type)) {
             return coerceToString(obj);
         }
@@ -335,9 +338,6 @@ public class ELSupport {
         }
         if (Boolean.class.equals(type) || Boolean.TYPE == type) {
             return coerceToBoolean(obj);
-        }
-        if (obj != null && type.isAssignableFrom(obj.getClass())) {
-            return obj;
         }
         if (type.isEnum()) {
             return coerceToEnum(obj, type);
