@@ -3,6 +3,7 @@ package org.jboss.el.lang;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -36,6 +37,12 @@ public class TestELArithmetic {
     @Test
     public void testCoerceNumberMyBigDecimal(){
         assertCoerceToBigDecimalSameNumber(new MyBigDecimal("3434"));
+    }
+    @Test
+    public void testCoerceLongToBigDecimal(){
+        Number num = ELArithmetic.BIGDECIMAL.coerce((Object)5L);
+        assertTrue("should be an instanceof BigDecimal but is of class "+num.getClass(), num instanceof BigDecimal);
+        assertEquals(5L, num.longValue());
     }
 
     private void assertNumberType(Class<?> type){

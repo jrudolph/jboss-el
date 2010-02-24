@@ -354,9 +354,6 @@ public abstract class ELArithmetic {
     protected abstract Number coerce(final Number num);
 
     protected final Number coerce(final Object obj) {
-        if (obj instanceof Number)
-            return (Number) obj;
-
         if (isNumber(obj)) {
             return coerce((Number) obj);
         }
