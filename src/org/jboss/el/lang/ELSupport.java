@@ -256,7 +256,10 @@ public class ELSupport {
     public final static Number coerceToNumber(final Object obj, final Class type)
             throws IllegalArgumentException {
         if (obj == null || "".equals(obj)) {
-            return coerceToNumber(ZERO, type);
+            if (type == Number.class)
+                return null;
+            else
+                return coerceToNumber(ZERO, type);
         }
         if (obj instanceof String) {
             return coerceToNumber((String) obj, type);

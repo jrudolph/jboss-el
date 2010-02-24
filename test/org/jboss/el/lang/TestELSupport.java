@@ -125,6 +125,6 @@ public class TestELSupport {
     }
     @Test
     public void coerceToTypeNullNumber(){
-        assertEquals(0l, ((Number) ELSupport.coerceToType(null, Number.class)).longValue());
+        assertEquals(null, ELSupport.coerceToType(null, Number.class));
     }
 }
